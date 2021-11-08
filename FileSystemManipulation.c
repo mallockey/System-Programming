@@ -58,9 +58,23 @@ void readFromFile() {
   }
 }
 
+void lseekExample() {
+  int fd = open("./testfiles/RandomText.txt", O_RDWR | O_CREAT, 0755);
+
+  if (fd < 0) {
+    printf("Error opening random_text.txt\n");
+  }
+
+  char *writeThis = "\nI am writing this at the 200 BYTE mark";
+
+  lseek(fd, 200, SEEK_CUR);
+  write(fd, writeThis, strlen(writeThis));
+}
+
 int main()
 {
   writeToFile();
   readFromFile();
+  lseekExample();
   return 0;
 }
